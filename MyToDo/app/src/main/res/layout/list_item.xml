@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginLeft="8dp">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_row="0"
+        android:layout_column="2">
+
+        <View
+            android:id="@+id/view_list_item"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+
+        <TextView
+            android:id="@+id/item_title_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_toRightOf="@id/view_list_item"
+            android:layout_toLeftOf="@id/item_check_id"/>
+
+        <CheckBox
+            android:id="@+id/item_check_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_weight="1"
+            android:text="Done" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/item_text_id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#7E413D3D"/>
+
+</GridLayout>
