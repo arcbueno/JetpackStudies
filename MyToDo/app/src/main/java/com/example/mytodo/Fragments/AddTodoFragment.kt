@@ -1,16 +1,14 @@
 package com.example.mytodo.Fragments
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.example.mytodo.Db.TodoDbHelper
+import com.example.mytodo.Db.MyApplication
 import com.example.mytodo.Models.Todo
-import com.example.mytodo.Models.TodoList
 
 import com.example.mytodo.R
 import kotlinx.android.synthetic.main.fragment_add_todo.*
@@ -29,8 +27,6 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class AddTodoFragment : Fragment() {
-
-    lateinit var todoDbHelpser : TodoDbHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,12 +49,9 @@ class AddTodoFragment : Fragment() {
         add_button.setOnClickListener{
             var todo = Todo(12,new_todo_title.text.toString(),new_todo_text.text.toString(),false )
 
-            todoDbHelpser = context?.let { it1 -> TodoDbHelper(it1) }!!
+            addTodo(todo)
+            findNavController().navigate(R.id.action_fragment_add_todo_to_fragment)
 
-            var result = todoDbHelpser.InsertTodo(todo)
-            if(result){
-                findNavController().navigate(R.id.action_fragment_add_todo_to_fragment)
-            }
 
         }
 
@@ -71,6 +64,10 @@ class AddTodoFragment : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
+    }
+
+    fun addTodo(todo:Todo){
+        MyApplication.database?.todoDao()?.insertTodo(todo)
     }
 
     /**

@@ -1,16 +1,9 @@
-package com.example.mytodo.Utils
+package com.example.mytodo.RecyclerViewUtils
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.mytodo.Models.Todo
-import com.example.mytodo.R
-import kotlinx.android.synthetic.main.list_item.view.*
 
 class MyAdapter(private val todos: List<Todo>): RecyclerView.Adapter<MyViewHolder> () {
 

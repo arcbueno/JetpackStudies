@@ -1,6 +1,5 @@
-package com.example.mytodo.Utils
+package com.example.mytodo.RecyclerViewUtils
 
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CheckBox

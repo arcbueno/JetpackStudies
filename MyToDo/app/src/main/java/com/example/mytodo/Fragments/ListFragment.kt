@@ -1,8 +1,5 @@
 package com.example.mytodo.Fragments
 
-import android.content.Context
-import android.content.SharedPreferences
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,11 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.*
-import com.example.mytodo.Db.TodoDbHelper
+import com.example.mytodo.Db.MyApplication
 import com.example.mytodo.Models.Todo
 import com.example.mytodo.Models.TodoList
 import com.example.mytodo.R
-import com.example.mytodo.Utils.MyAdapter
+import com.example.mytodo.RecyclerViewUtils.MyAdapter
 import kotlinx.android.synthetic.main.fragment_list.*
 
 
@@ -30,13 +27,16 @@ private const val ARG_PARAM2 = "param2"
  * Use the [ListFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+
+var listaTodo = ArrayList<Todo>()
+
 class ListFragment : Fragment() {
-    lateinit var todoDbHelpser : TodoDbHelper
     var todoList = TodoList().toDos
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
+
     }
 
     override fun onCreateView(
@@ -47,9 +47,6 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        todoDbHelpser = context?.let { TodoDbHelper(it) }!!
-
-        //todoDbHelpser.dropTable()
 
         //Populate()
         updateList()
@@ -66,18 +63,26 @@ class ListFragment : Fragment() {
     }
 
     private fun updateList(){
+
+
+        var lista = MyApplication.database?.todoDao()?.getAllTodos() as ArrayList<Todo>
+
+        for(i in 0 until lista.size){
+            if(!listaTodo.contains(lista[i])){
+                listaTodo.add(lista[i])
+            }
+        }
+
         list_id.apply {
             layoutManager = GridLayoutManager(activity, 2) as RecyclerView.LayoutManager?
-            adapter = MyAdapter(getAllTodos())
+            adapter = MyAdapter(listaTodo)
         }
     }
 
     fun addTodo(title:String, text: String, checked:Boolean){
-        var result = todoDbHelpser.InsertTodo(Todo(null, title, text, checked))
-    }
 
-    fun getAllTodos():ArrayList<Todo>{
-        return todoDbHelpser.readAllTodos()
+        var todo = Todo(null, title, text, checked)
+        MyApplication.database?.todoDao()?.insertTodo(todo)
     }
 
     fun Populate(){
@@ -85,15 +90,6 @@ class ListFragment : Fragment() {
             addTodo(i.Title, i.Text, i.Checked)
         }
 
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
-
-
-    override fun onDetach() {
-        super.onDetach()
     }
 
     /**
