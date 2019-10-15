@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.*
 import com.example.mytodo.Db.MyApplication
+import com.example.mytodo.Db.TodoRepository
 import com.example.mytodo.Models.IListaTodo
 import com.example.mytodo.Models.Todo
 import com.example.mytodo.Models.TodoList
@@ -59,7 +60,7 @@ class ListFragment : Fragment() {
 
         var todoViewModel = ViewModelProviders.of(this).get(TodoViewModel::class.java)
 
-        var myadapter = MyAdapter(todoViewModel)
+        var myadapter = MyAdapter(todoViewModel, ListaTodo())
         todoViewModel.getAllTodos().observe(context, Observer { myadapter.setTodo(it) })
 
 
@@ -89,5 +90,12 @@ class ListFragment : Fragment() {
 
         @JvmStatic
         fun newInstance() : ListFragment = ListFragment()
+    }
+
+    private class ListaTodo: IListaTodo{
+        override fun update(todo:Todo){
+            var repo = TodoRepository(MyApplication())
+            repo.update(todo)
+        }
     }
 }

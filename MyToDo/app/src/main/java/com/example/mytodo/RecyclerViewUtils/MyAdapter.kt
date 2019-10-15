@@ -13,7 +13,7 @@ import com.example.mytodo.R
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.list_item.*
 
-class MyAdapter(var viewModel: TodoViewModel): RecyclerView.Adapter<MyViewHolder>(), IListaTodo {
+class MyAdapter(var viewModel: TodoViewModel,val lista: IListaTodo): RecyclerView.Adapter<MyViewHolder>() {
 
     private var todos: List<Todo> = ArrayList()
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -41,7 +41,7 @@ class MyAdapter(var viewModel: TodoViewModel): RecyclerView.Adapter<MyViewHolder
         holder.checked?.isChecked = todos[position].Checked
         holder.checked?.setOnClickListener {
             todos[position].Checked = !todos[position].Checked
-            update(todos[position])
+            lista.update(todos[position])
             notifyDataSetChanged()
         }
     }
