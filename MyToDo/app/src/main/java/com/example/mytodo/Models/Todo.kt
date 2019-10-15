@@ -9,7 +9,7 @@ data class Todo(
     @PrimaryKey(autoGenerate = true) val Id: Int?,
     @ColumnInfo(name = "title") val Title: String,
     @ColumnInfo(name = "texto") val Text: String,
-    @ColumnInfo(name = "checked") val Checked: Boolean
+    @ColumnInfo(name = "checked") var Checked: Boolean
 )
 
 

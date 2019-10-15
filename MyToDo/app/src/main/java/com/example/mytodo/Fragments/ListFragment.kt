@@ -1,18 +1,26 @@
 package com.example.mytodo.Fragments
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.*
 import com.example.mytodo.Db.MyApplication
+import com.example.mytodo.Models.IListaTodo
 import com.example.mytodo.Models.Todo
 import com.example.mytodo.Models.TodoList
+import com.example.mytodo.Models.TodoViewModel
 import com.example.mytodo.R
 import com.example.mytodo.RecyclerViewUtils.MyAdapter
 import kotlinx.android.synthetic.main.fragment_list.*
+import kotlinx.android.synthetic.main.list_item.*
 
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,7 +44,6 @@ class ListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
-
     }
 
     override fun onCreateView(
@@ -48,34 +55,21 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //Populate()
-        updateList()
+        var context = this
+
+        var todoViewModel = ViewModelProviders.of(this).get(TodoViewModel::class.java)
+
+        var myadapter = MyAdapter(todoViewModel)
+        todoViewModel.getAllTodos().observe(context, Observer { myadapter.setTodo(it) })
+
+
+        var recyclerView = list_id
+
+        recyclerView.layoutManager = GridLayoutManager(activity, 2) as RecyclerView.LayoutManager?
+        recyclerView.adapter = myadapter
 
         fragment_add_todo.setOnClickListener{
             findNavController().navigate(R.id.action_fragment_to_fragment_add_todo)
-        }
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-        updateList()
-    }
-
-    private fun updateList(){
-
-
-        var lista = MyApplication.database?.todoDao()?.getAllTodos() as ArrayList<Todo>
-
-        for(i in 0 until lista.size){
-            if(!listaTodo.contains(lista[i])){
-                listaTodo.add(lista[i])
-            }
-        }
-
-        list_id.apply {
-            layoutManager = GridLayoutManager(activity, 2) as RecyclerView.LayoutManager?
-            adapter = MyAdapter(listaTodo)
         }
     }
 
@@ -89,31 +83,10 @@ class ListFragment : Fragment() {
         for ( i in todoList){
             addTodo(i.Title, i.Text, i.Checked)
         }
-
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
-
-
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ListFragment.
-         */
+
         @JvmStatic
         fun newInstance() : ListFragment = ListFragment()
     }

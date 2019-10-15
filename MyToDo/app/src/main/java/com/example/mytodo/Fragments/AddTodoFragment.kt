@@ -6,9 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.mytodo.Db.MyApplication
 import com.example.mytodo.Models.Todo
+import com.example.mytodo.Models.TodoViewModel
 
 import com.example.mytodo.R
 import kotlinx.android.synthetic.main.fragment_add_todo.*
@@ -18,14 +22,6 @@ import kotlinx.android.synthetic.main.fragment_add_todo.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [AddTodoFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [AddTodoFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AddTodoFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,57 +43,36 @@ class AddTodoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         add_button.setOnClickListener{
-            var todo = Todo(12,new_todo_title.text.toString(),new_todo_text.text.toString(),false )
+            it.hideKeyboard()
+            var todo = Todo(null,new_todo_title.text.toString(),new_todo_text.text.toString(),false )
 
             addTodo(todo)
             findNavController().navigate(R.id.action_fragment_add_todo_to_fragment)
 
-
         }
-
-
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
-
-    override fun onDetach() {
-        super.onDetach()
     }
 
     fun addTodo(todo:Todo){
-        MyApplication.database?.todoDao()?.insertTodo(todo)
+        if ( new_todo_title.text.toString().trim().isBlank() ) {
+            Toast.makeText(context, "Can not insert empty to do!", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        var todoViewModel = ViewModelProviders.of(this).get(TodoViewModel::class.java)
+        todoViewModel.insert(todo)
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
+    fun View.hideKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
+    }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AddTodoFragment.
-         */
+
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             AddTodoFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+
             }
     }
 }

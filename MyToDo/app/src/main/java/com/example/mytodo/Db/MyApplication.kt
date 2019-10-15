@@ -16,6 +16,7 @@ open class MyApplication : Application(){
 
         //Room
         database = Room.databaseBuilder(this, AppDataBase::class.java, "todos").allowMainThreadQueries().build()
+        //Using Allow Main Thread Queries is not recommended
 
         //Stetho
         val initializerBuilder = Stetho.newInitializerBuilder(this)

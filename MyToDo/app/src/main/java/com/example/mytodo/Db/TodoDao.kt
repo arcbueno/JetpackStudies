@@ -1,11 +1,13 @@
 package com.example.mytodo.Db
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import com.example.mytodo.Models.Todo
 
 @Dao
 interface TodoDao {
-    @Query("SELECT * FROM todos") fun getAllTodos(): List<Todo>
+    @Query("SELECT * FROM todos") fun getAllTodos(): LiveData<List<Todo>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE) fun insertTodo(vararg todo: Todo)
 
@@ -13,7 +15,5 @@ interface TodoDao {
     fun updateTodo(todo: Todo)
 
     @Delete fun deleteTodo(todo: Todo)
-
-//    @Query ("DROP TABLE todos") fun dropTable()
 
 }
