@@ -37,6 +37,10 @@ class TodoRepository(application: Application) {
         return allTodos
     }
 
+    fun getById(id:Int): Todo{
+        return todoDao.getById(id)
+    }
+
     private class InsertTodoAsyncTask(todoDao:TodoDao) : AsyncTask<Todo, Unit, Unit>() {
         val todoDao = todoDao
 

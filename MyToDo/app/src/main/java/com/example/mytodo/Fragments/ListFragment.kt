@@ -20,22 +20,11 @@ import com.example.mytodo.Models.TodoList
 import com.example.mytodo.Models.TodoViewModel
 import com.example.mytodo.R
 import com.example.mytodo.RecyclerViewUtils.MyAdapter
+import com.example.mytodo.RecyclerViewUtils.OnItemClickListener
+import com.example.mytodo.RecyclerViewUtils.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_list.*
 import kotlinx.android.synthetic.main.list_item.*
 
-
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [ListFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [ListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 
 var listaTodo = ArrayList<Todo>()
 
@@ -63,15 +52,17 @@ class ListFragment : Fragment() {
         var myadapter = MyAdapter(todoViewModel, ListaTodo())
         todoViewModel.getAllTodos().observe(context, Observer { myadapter.setTodo(it) })
 
-
         var recyclerView = list_id
 
-        recyclerView.layoutManager = GridLayoutManager(activity, 2) as RecyclerView.LayoutManager?
+
+        recyclerView.layoutManager = GridLayoutManager(activity, 2)
         recyclerView.adapter = myadapter
 
-        fragment_add_todo.setOnClickListener{
+        add_todo_button.setOnClickListener{
             findNavController().navigate(R.id.action_fragment_to_fragment_add_todo)
         }
+
+
     }
 
     fun addTodo(title:String, text: String, checked:Boolean){

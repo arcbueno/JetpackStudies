@@ -16,4 +16,6 @@ interface TodoDao {
 
     @Delete fun deleteTodo(todo: Todo)
 
+    @Query("Select * from todos where todos.id = :id" ) fun getById(id:Int):Todo
+
 }

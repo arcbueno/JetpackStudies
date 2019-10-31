@@ -1,11 +1,15 @@
 package com.example.mytodo.RecyclerViewUtils
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.CompoundButton
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mytodo.Fragments.TodoDetail
 import com.example.mytodo.Models.IListaTodo
 import com.example.mytodo.Models.Todo
 import com.example.mytodo.Models.TodoViewModel
@@ -44,6 +48,11 @@ class MyAdapter(var viewModel: TodoViewModel,val lista: IListaTodo): RecyclerVie
             lista.update(todos[position])
             notifyDataSetChanged()
         }
+
+        holder.text?.setOnClickListener{
+            val bundle = Bundle()
+            bundle.putInt("todoId", todos[position].Id!!)
+            it.findNavController().navigate(R.id.action_fragment_to_fragment_todo_detail, bundle)
+        }
     }
 }
-

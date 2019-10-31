@@ -47,7 +47,7 @@ class AddTodoFragment : Fragment() {
             var todo = Todo(null,new_todo_title.text.toString(),new_todo_text.text.toString(),false )
 
             addTodo(todo)
-            findNavController().navigate(R.id.action_fragment_add_todo_to_fragment)
+            findNavController().navigate(R.id.fragment)
 
         }
     }

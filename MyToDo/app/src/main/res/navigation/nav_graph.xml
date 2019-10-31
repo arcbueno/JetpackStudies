@@ -12,11 +12,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:navGraph="@navigation/nav_graph"
-        app:defaultNavHost="true"
-        app:destination= "@id/fragment_add_todo">
+        app:defaultNavHost="true">
         <action
             android:id="@+id/action_fragment_to_fragment_add_todo"
             app:destination="@id/fragment_add_todo"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_fragment_to_fragment_todo_detail"
+            app:destination="@id/fragment_todo_detail"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
@@ -28,7 +32,26 @@
         android:layout_height="wrap_content">
         <action
             android:id="@+id/action_fragment_add_todo_to_fragment"
-            app:destination="@id/fragment" />
+            app:destination="@id/fragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_todo_detail"
+        android:name="com.example.mytodo.Fragments.TodoDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <argument
+            android:name="todoId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_fragment_todo_detail_to_fragment"
+            app:destination="@id/fragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
 
 </navigation>

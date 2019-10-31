@@ -13,6 +13,7 @@
         android:layout_row="0"
         android:layout_column="2">
 
+
         <View
             android:id="@+id/view_list_item"
             android:layout_width="0dp"

@@ -21,6 +21,10 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         return allTodos
     }
 
+    fun getById(id:Int): Todo{
+        return repository.getById(id)
+    }
+
     fun delete(todo: Todo){
         repository.delete(todo)
     }
