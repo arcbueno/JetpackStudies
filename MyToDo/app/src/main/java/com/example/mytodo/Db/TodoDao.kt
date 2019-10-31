@@ -1,9 +1,8 @@
 package com.example.mytodo.Db
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.*
-import com.example.mytodo.Models.Todo
+import com.example.mytodo.models.Todo
 
 @Dao
 interface TodoDao {

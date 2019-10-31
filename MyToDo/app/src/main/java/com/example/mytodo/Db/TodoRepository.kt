@@ -3,9 +3,7 @@ package com.example.mytodo.Db
 import android.app.Application
 import android.os.AsyncTask
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.example.mytodo.Fragments.listaTodo
-import com.example.mytodo.Models.Todo
+import com.example.mytodo.models.Todo
 
 class TodoRepository(application: Application) {
 

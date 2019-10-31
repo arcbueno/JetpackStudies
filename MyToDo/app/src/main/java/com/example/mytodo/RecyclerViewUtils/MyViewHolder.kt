@@ -4,12 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
-import android.widget.Toast
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mytodo.Models.Todo
+import com.example.mytodo.models.Todo
 import com.example.mytodo.R
-import java.text.FieldPosition
 
 class MyViewHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerView.ViewHolder(inflater.inflate(
     R.layout.list_item, parent, false)) {

@@ -1,29 +1,23 @@
 package com.example.mytodo.Fragments
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.*
 import com.example.mytodo.Db.MyApplication
 import com.example.mytodo.Db.TodoRepository
-import com.example.mytodo.Models.IListaTodo
-import com.example.mytodo.Models.Todo
-import com.example.mytodo.Models.TodoList
-import com.example.mytodo.Models.TodoViewModel
+import com.example.mytodo.models.IListaTodo
+import com.example.mytodo.models.Todo
+import com.example.mytodo.models.TodoList
+import com.example.mytodo.models.TodoViewModel
 import com.example.mytodo.R
 import com.example.mytodo.RecyclerViewUtils.MyAdapter
-import com.example.mytodo.RecyclerViewUtils.OnItemClickListener
-import com.example.mytodo.RecyclerViewUtils.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_list.*
-import kotlinx.android.synthetic.main.list_item.*
 
 
 var listaTodo = ArrayList<Todo>()

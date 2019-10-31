@@ -10,9 +10,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
-import com.example.mytodo.Db.MyApplication
-import com.example.mytodo.Models.Todo
-import com.example.mytodo.Models.TodoViewModel
+import com.example.mytodo.models.Todo
+import com.example.mytodo.models.TodoViewModel
 
 import com.example.mytodo.R
 import kotlinx.android.synthetic.main.fragment_add_todo.*

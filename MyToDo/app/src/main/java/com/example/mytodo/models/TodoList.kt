@@ -1,4 +1,4 @@
-package com.example.mytodo.Models
+package com.example.mytodo.models
 
 class TodoList {
     var toDos = arrayListOf(

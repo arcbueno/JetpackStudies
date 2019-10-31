@@ -3,19 +3,12 @@ package com.example.mytodo.RecyclerViewUtils
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.CompoundButton
-import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mytodo.Fragments.TodoDetail
-import com.example.mytodo.Models.IListaTodo
-import com.example.mytodo.Models.Todo
-import com.example.mytodo.Models.TodoViewModel
+import com.example.mytodo.models.IListaTodo
+import com.example.mytodo.models.Todo
+import com.example.mytodo.models.TodoViewModel
 import com.example.mytodo.R
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.list_item.*
 
 class MyAdapter(var viewModel: TodoViewModel,val lista: IListaTodo): RecyclerView.Adapter<MyViewHolder>() {
 

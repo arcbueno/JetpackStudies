@@ -1,4 +1,4 @@
-package com.example.mytodo.Models
+package com.example.mytodo.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

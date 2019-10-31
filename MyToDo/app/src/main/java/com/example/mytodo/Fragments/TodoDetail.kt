@@ -1,9 +1,7 @@
 package com.example.mytodo.Fragments
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
-import android.text.SpannableStringBuilder
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,14 +11,18 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
-import com.example.mytodo.Models.Todo
-import com.example.mytodo.Models.TodoViewModel
+import com.example.mytodo.models.Todo
+import com.example.mytodo.models.TodoViewModel
 import com.example.mytodo.R
+import com.example.mytodo.RecyclerViewUtils.MyViewHolder
+import com.example.mytodo.databinding.FragmentTodoDetailBinding
 import kotlinx.android.synthetic.main.fragment_todo_detail.*
 
 class TodoDetail : Fragment() {
 
-
+    lateinit var binding:FragmentTodoDetailBinding
+    lateinit var todoViewModel:TodoViewModel
+    var todoData:Todo? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -31,25 +33,19 @@ class TodoDetail : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        var binding:FragmentMainBinding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_todo_detail,container , false)
-        var todoViewModel = ViewModelProviders.of(this).get(TodoViewModel::class.java)
+        binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_todo_detail, container,false)
+        binding.lifecycleOwner = this
+
+        todoViewModel = ViewModelProviders.of(this).get(TodoViewModel::class.java)
 
         var id = arguments!!.getInt("todoId")
-        var todo = getTodo(id, todoViewModel)
+        todoData = getTodo(id, todoViewModel)
 
-        detail_title.text = SpannableStringBuilder(todo?.Title)
-        detail_text.text = SpannableStringBuilder(todo?.Text)
+        binding.todo = todoData
 
-        detail_save.setOnClickListener{
-            it.hideKeyboard()
-            var newTodo = Todo(id,detail_title.text.toString(),detail_text.text.toString(),todo!!.Checked )
 
-            addTodo(newTodo, todoViewModel)
-            findNavController().navigate(R.id.action_fragment_todo_detail_to_fragment)
-        }
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_todo_detail, container, false)
-
+        return binding.root
     }
 
     override fun onAttach(context: Context?) {
@@ -59,6 +55,20 @@ class TodoDetail : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        detail_save.setOnClickListener{
+            it.hideKeyboard()
+            var newTodo = Todo(todoData!!.Id,detail_title.text.toString(),detail_text.text.toString(),todoData!!.Checked )
+
+            addTodo(newTodo, todoViewModel)
+            findNavController().navigate(R.id.action_fragment_todo_detail_to_fragment)
+        }
+
+
+
+//        detail_title.text = SpannableStringBuilder(todo?.Title)
+//        detail_text.text = SpannableStringBuilder(todo?.Text)
+
 
 
 

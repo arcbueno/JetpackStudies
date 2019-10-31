@@ -1,9 +1,8 @@
-package com.example.mytodo.Models
+package com.example.mytodo.models
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import com.example.mytodo.Db.MyApplication
 import com.example.mytodo.Db.TodoRepository
 
 class TodoViewModel(application: Application) : AndroidViewModel(application) {

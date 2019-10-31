@@ -1,59 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Fragments.TodoDetail"
-    android:orientation="vertical"
-    android:layout_marginTop="8dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <variable name="todo" type="com.example.mytodo.Models.Todo"/>
-        <variable
-            name= "viewmodel"
-            type="com.example.mytodo.Models.TodoViewModel"/>
-        <variable
-            name= "todoId"
-            type="int"/>
-        <variable
-            name="list"
-            type="Todo[]"/>
+        <variable name="todo" type="com.example.mytodo.models.Todo"/>
     </data>
 
-    <RelativeLayout
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        tools:context=".Fragments.TodoDetail"
+        android:orientation="vertical"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp">
 
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <EditText
+                android:id="@+id/detail_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@id/detail_save"
+                android:layout_toRightOf="@id/detail_save"
+                android:text="@{todo.Title}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <Button
+                android:id="@+id/detail_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="Save" />
+        </RelativeLayout>
 
         <EditText
-            android:id="@+id/detail_title"
+            android:id="@+id/detail_text"
+            style="@android:style/Widget.AutoCompleteTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@id/detail_save"
-            android:layout_toRightOf="@id/detail_save"
-            android:text="@{todo.Title}"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:layout_marginTop="8dp"
+            android:text="@{todo.Text}"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            android:singleLine="false" />
 
-        <Button
-            android:id="@+id/detail_save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="Save" />
-    </RelativeLayout>
-
-    <EditText
-        android:id="@+id/detail_text"
-        style="@android:style/Widget.AutoCompleteTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@{todo.Text}"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        android:singleLine="false" />
-
-</LinearLayout>
+    </LinearLayout>
+</layout>
