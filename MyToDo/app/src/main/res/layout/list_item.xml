@@ -13,6 +13,10 @@
         android:layout_row="0"
         android:layout_column="2">
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#7E413D3D"/>
 
         <View
             android:id="@+id/view_list_item"
@@ -42,9 +46,6 @@
         android:layout_height="match_parent"
         android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#7E413D3D"/>
+
 
 </GridLayout>

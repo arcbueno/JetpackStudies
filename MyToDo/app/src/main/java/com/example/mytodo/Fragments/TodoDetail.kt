@@ -21,12 +21,9 @@ import kotlinx.android.synthetic.main.fragment_todo_detail.*
 class TodoDetail : Fragment() {
 
     lateinit var binding:FragmentTodoDetailBinding
-    lateinit var todoViewModel:TodoViewModel
+    private lateinit var todoViewModel:TodoViewModel
+    var id: Int? = null
     var todoData:Todo? = null
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,19 +35,12 @@ class TodoDetail : Fragment() {
 
         todoViewModel = ViewModelProviders.of(this).get(TodoViewModel::class.java)
 
-        var id = arguments!!.getInt("todoId")
-        todoData = getTodo(id, todoViewModel)
+        id = arguments!!.getInt("todoId")
+        todoData = getTodo(id!!, todoViewModel)
 
         binding.todo = todoData
 
-
-        // Inflate the layout for this fragment
         return binding.root
-    }
-
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -64,19 +54,15 @@ class TodoDetail : Fragment() {
             findNavController().navigate(R.id.action_fragment_todo_detail_to_fragment)
         }
 
-
-
-//        detail_title.text = SpannableStringBuilder(todo?.Title)
-//        detail_text.text = SpannableStringBuilder(todo?.Text)
-
-
-
-
-
+        delete_item.setOnClickListener{
+            it.hideKeyboard()
+            deleteTodo(id!!, todoViewModel)
+            findNavController().navigate(R.id.action_fragment_todo_detail_to_fragment)
+        }
 
     }
 
-    fun addTodo(todo:Todo, todoViewModel:TodoViewModel){
+    private fun addTodo(todo:Todo, todoViewModel:TodoViewModel){
         if ( detail_title.text.toString().trim().isBlank() ) {
             Toast.makeText(context, "Can not insert an empty To do!", Toast.LENGTH_SHORT).show()
             return
@@ -84,12 +70,17 @@ class TodoDetail : Fragment() {
         todoViewModel.insert(todo)
     }
 
-    fun getTodo(id: Int, todoViewModel:TodoViewModel) : Todo? {
+    private fun deleteTodo(id:Int, todoViewModel: TodoViewModel){
+        var todo = getTodo(id, todoViewModel)
+        todoViewModel.delete(todo!!)
+    }
+
+    private fun getTodo(id: Int, todoViewModel:TodoViewModel) : Todo? {
         return todoViewModel.getById(id)
     }
 
 
-    fun View.hideKeyboard() {
+    private fun View.hideKeyboard() {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(windowToken, 0)
     }
