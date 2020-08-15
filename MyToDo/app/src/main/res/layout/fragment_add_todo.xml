@@ -1,52 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.AddTodoFragment"
+    xmlns:onRefreshListener="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_marginRight="8dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginTop="8dp">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <RelativeLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        tools:context=".Fragments.AddTodo.AddTodoFragment"
+        android:orientation="vertical"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/background_with_border_yellow"
+        android:layout_marginTop="8dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add a new To Do"
+            android:layout_marginBottom="8dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="8dp"
+            android:text="New To Do"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-        <Button
-            android:id="@+id/add_button"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/new_todo_title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add"
-            android:layout_alignParentRight="true"
-            android:layout_weight="1"/>
-    </RelativeLayout>
+            android:ems="10"
+            android:hint="To Do title"
+            android:layout_marginHorizontal="8dp"
+            android:inputType="textPersonName"
+            android:singleLine="true" />
 
-    <EditText
-        android:id="@+id/new_todo_title"
-        android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/new_todo_text"
+            style="@style/Widget.AppCompat.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginHorizontal="8dp"
+            android:ems="10"
+            android:hint="Todo Text"
+            android:inputType="textMultiLine"
+            android:singleLine="false"
+            android:layout_marginTop="8dp" />
+
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_new"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="To Do title"
-        android:inputType="textPersonName"
-        android:singleLine="true" />
+        android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"
+        android:contentDescription="Save"
+        app:backgroundTint="@color/colorAccent"
+        app:maxImageSize="44dp"
+        app:srcCompat="?android:attr/textCheckMarkInverse" />
 
-    <EditText
-        android:id="@+id/new_todo_text"
-        style="@style/Widget.AppCompat.EditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Todo Text"
-        android:inputType="textMultiLine"
-        android:singleLine="false"
-        android:layout_marginTop="8dp"/>
-
-
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

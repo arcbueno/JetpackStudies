@@ -10,13 +10,11 @@ open class MyApplication : Application(){
         var database: AppDataBase? = null
     }
 
-
     override fun onCreate() {
         super.onCreate()
 
         //Room
         database = Room.databaseBuilder(this, AppDataBase::class.java, "todos").allowMainThreadQueries().build()
-        //Using Allow Main Thread Queries is not recommended
 
         //Stetho
         val initializerBuilder = Stetho.newInitializerBuilder(this)
@@ -24,6 +22,4 @@ open class MyApplication : Application(){
         val initializer = initializerBuilder.build()
         Stetho.initialize(initializer)
     }
-
-
 }

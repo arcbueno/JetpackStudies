@@ -13,7 +13,6 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var navController: NavController
     lateinit var navHostFragment: NavHostFragment
-    //private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

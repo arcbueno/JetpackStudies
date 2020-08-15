@@ -1,4 +1,4 @@
-package com.example.mytodo.Fragments
+package com.example.mytodo.Fragments.AddTodo
 
 import android.content.Context
 import android.os.Bundle
@@ -8,20 +8,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.mytodo.models.Todo
-import com.example.mytodo.models.TodoViewModel
 
 import com.example.mytodo.R
 import kotlinx.android.synthetic.main.fragment_add_todo.*
 
-
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 class AddTodoFragment : Fragment() {
+
+    lateinit var addTodoViewModel: AddTodoViewModel;
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        addTodoViewModel = ViewModelProvider(this).get(AddTodoViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,24 +43,27 @@ class AddTodoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        add_button.setOnClickListener{
+        fab_new.setOnClickListener {
             it.hideKeyboard()
-            var todo = Todo(null,new_todo_title.text.toString(),new_todo_text.text.toString(),false )
+            var todo =
+                Todo(null, new_todo_title.text.toString(), new_todo_text.text.toString(), false)
 
-            addTodo(todo)
-            findNavController().navigate(R.id.fragment)
+            var success = addTodo(todo)
+            if (success) {
+                findNavController().navigate(R.id.fragment)
+            }
 
         }
     }
 
-    fun addTodo(todo:Todo){
-        if ( new_todo_title.text.toString().trim().isBlank() ) {
-            Toast.makeText(context, "Can not insert empty to do!", Toast.LENGTH_SHORT).show()
-            return
+    fun addTodo(todo: Todo): Boolean {
+        if (new_todo_title.text.toString().trim().isBlank()) {
+            Toast.makeText(context, "Cannot insert empty to do!", Toast.LENGTH_SHORT).show()
+            return false
         }
 
-        var todoViewModel = ViewModelProviders.of(this).get(TodoViewModel::class.java)
-        todoViewModel.insert(todo)
+        addTodoViewModel.insert(todo)
+        return true;
     }
 
     fun View.hideKeyboard() {
@@ -69,9 +74,6 @@ class AddTodoFragment : Fragment() {
     companion object {
 
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AddTodoFragment().apply {
-
-            }
+        fun newInstance() = AddTodoFragment()
     }
 }

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/list_item_layout"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@drawable/background_with_border_yellow"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
     android:layout_marginRight="8dp"
@@ -16,36 +19,47 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#7E413D3D"/>
+            android:background="#7E413D3D" />
 
         <View
             android:id="@+id/view_list_item"
             android:layout_width="0dp"
-            android:layout_height="0dp"/>
+            android:layout_height="0dp" />
 
         <TextView
             android:id="@+id/item_title_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:paddingLeft="10dp"
+            android:layout_toLeftOf="@id/item_check_id"
             android:layout_toRightOf="@id/view_list_item"
-            android:layout_toLeftOf="@id/item_check_id"/>
+            android:paddingTop="10dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <CheckBox
             android:id="@+id/item_check_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignTop="@id/item_title_id"
+            android:layout_alignBottom="@id/item_title_id"
             android:layout_alignParentRight="true"
             android:layout_weight="1"
+            android:buttonTint="@drawable/color_check"
+            android:gravity="start"
+            android:paddingTop="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="10dp"
             android:text="Done" />
     </RelativeLayout>
 
     <TextView
+        android:paddingTop="10dp"
         android:id="@+id/item_text_id"
+        android:paddingLeft="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textAppearance="@style/TextAppearance.AppCompat.Small" />
-
-
 
 </GridLayout>

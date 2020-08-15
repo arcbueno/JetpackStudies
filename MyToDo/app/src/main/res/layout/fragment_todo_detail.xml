@@ -4,65 +4,112 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <variable name="todo" type="com.example.mytodo.models.Todo"/>
+
+        <variable
+            name="todo"
+            type="com.example.mytodo.models.Todo" />
     </data>
 
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Fragments.TodoDetail"
-        android:orientation="vertical"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp">
+        android:orientation="vertical">
 
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-            <EditText
-                android:id="@+id/detail_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_toLeftOf="@id/detail_save"
-                android:layout_toRightOf="@id/detail_save"
-                android:text="@{todo.Title}"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <Button
-                android:id="@+id/detail_save"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="Save" />
-        </RelativeLayout>
-
-        <EditText
-            android:id="@+id/detail_text"
-            style="@android:style/Widget.AutoCompleteTextView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            tools:context=".Fragments.TodoDetail.TodoDetail"
+            android:orientation="vertical"
+            android:background="@drawable/background_with_border_yellow"
             android:layout_marginTop="8dp"
-            android:text="@{todo.Text}"
-            android:ems="10"
-            android:inputType="textMultiLine"
-            android:singleLine="false" />
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            <!--            <EditText-->
+            <!--                android:id="@+id/detail_title"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_alignParentLeft="true"-->
+            <!--                android:hint="To Do title"-->
+            <!--                android:text="@{todo.Title}"-->
+            <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large" />-->
 
-            <ImageButton
-                android:id="@+id/delete_item"
+            <!--            <EditText-->
+            <!--                android:id="@+id/detail_text"-->
+            <!--                style="@android:style/Widget.AutoCompleteTextView"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="8dp"-->
+            <!--                android:hint="To Do body"-->
+            <!--                android:text="@{todo.Text}"-->
+            <!--                android:ems="10"-->
+            <!--                android:inputType="textMultiLine"-->
+            <!--                android:singleLine="false" />-->
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                app:srcCompat="@android:drawable/ic_menu_delete" />
-        </RelativeLayout>
+                android:layout_marginBottom="8dp"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="8dp"
+                android:text="Update To Do"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/update_todo_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="To Do title"
+                android:text="@{todo.Title}"
+                android:layout_marginHorizontal="8dp"
+                android:inputType="textPersonName"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/update_todo_text"
+                style="@style/Widget.AppCompat.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginHorizontal="8dp"
+                android:ems="10"
+                android:text="@{todo.Text}"
+                android:hint="Todo Text"
+                android:inputType="textMultiLine"
+                android:singleLine="false"
+                android:layout_marginTop="8dp" />
+
+
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="73dp"
+            android:layout_gravity="top|end"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="85dp"
+            android:paddingBottom="48dp"
+            android:paddingTop="16dp"
+            android:src="@android:drawable/ic_menu_delete"
+            app:layout_anchor="@id/fab_save"
+            app:layout_anchorGravity="top"
+            app:maxImageSize="36dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="16dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginBottom="48dp"
+            android:paddingTop="36dp"
+            app:maxImageSize="48dp"
+            app:srcCompat="?android:attr/textCheckMarkInverse" />
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 </layout>
