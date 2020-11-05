@@ -59,6 +59,7 @@ class ListFragment : Fragment() {
         fab_add.setOnClickListener {
             findNavController().navigate(R.id.action_fragment_to_fragment_add_todo)
         }
+        
     }
 
     companion object {
