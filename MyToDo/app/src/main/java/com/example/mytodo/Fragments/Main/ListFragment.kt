@@ -17,9 +17,9 @@ import com.example.mytodo.RecyclerViewUtils.MyAdapter
 import kotlinx.android.synthetic.main.fragment_list.*
 
 
-var listaTodo = ArrayList<Todo>()
-
 class ListFragment : Fragment() {
+
+    var listaTodo = ArrayList<Todo>()
 
     // Recebendo instância da viewmodel
     lateinit var listViewModel: ListFragmentViewModel;
@@ -59,7 +59,7 @@ class ListFragment : Fragment() {
         fab_add.setOnClickListener {
             findNavController().navigate(R.id.action_fragment_to_fragment_add_todo)
         }
-        
+
     }
 
     companion object {
